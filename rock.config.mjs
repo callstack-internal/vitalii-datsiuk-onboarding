@@ -1,11 +1,11 @@
 // @ts-check
 import { platformIOS } from '@rock-js/platform-ios';
 import { platformAndroid } from '@rock-js/platform-android';
-import { pluginMetro } from '@rock-js/plugin-metro';
+import { pluginRepack } from '@rock-js/plugin-repack';
 
 /** @type {import('rock').Config} */
 export default {
-  bundler: pluginMetro(),
+  bundler: pluginRepack(),
   platforms: {
     ios: platformIOS(),
     android: platformAndroid(),
