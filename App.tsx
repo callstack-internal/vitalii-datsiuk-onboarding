@@ -5,33 +5,9 @@
 import { StatusBar, useColorScheme } from 'react-native';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {
-  createStaticNavigation,
-  type StaticParamList,
-} from '@react-navigation/native';
 
-import ListScreen from '@screens/List';
 import { queryClient } from '@api/client';
-import DetailsScreen from '@screens/Details';
-
-const RootStack = createNativeStackNavigator({
-  initialRouteName: 'List',
-  screens: {
-    List: ListScreen,
-    Details: DetailsScreen,
-  },
-});
-
-const Navigation = createStaticNavigation(RootStack);
-
-type RootStackParamList = StaticParamList<typeof RootStack>;
-
-declare global {
-  namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
-  }
-}
+import RootNavigation from '@/navigation/root';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -40,7 +16,7 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <SafeAreaProvider>
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <Navigation />
+        <RootNavigation />
       </SafeAreaProvider>
     </QueryClientProvider>
   );
