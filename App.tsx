@@ -11,9 +11,9 @@ import {
   type StaticParamList,
 } from '@react-navigation/native';
 
-import ListScreen from './src/screens/List';
-import { queryClient } from './src/api/client';
-import DetailsScreen from './src/screens/Details';
+import ListScreen from '@screens/List';
+import { queryClient } from '@api/client';
+import DetailsScreen from '@screens/Details';
 
 const RootStack = createNativeStackNavigator({
   initialRouteName: 'List',
