@@ -3,6 +3,7 @@
  */
 
 import { StatusBar, useColorScheme } from 'react-native';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
@@ -11,6 +12,7 @@ import {
 } from '@react-navigation/native';
 
 import ListScreen from './src/screens/List';
+import { queryClient } from './src/api/client';
 import DetailsScreen from './src/screens/Details';
 
 const RootStack = createNativeStackNavigator({
@@ -35,10 +37,12 @@ const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <Navigation />
-    </SafeAreaProvider>
+    <QueryClientProvider client={queryClient}>
+      <SafeAreaProvider>
+        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+        <Navigation />
+      </SafeAreaProvider>
+    </QueryClientProvider>
   );
 };
 
