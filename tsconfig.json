@@ -5,11 +5,11 @@
   "compilerOptions": {
     "types": ["node"],
     "baseUrl": "./",
-    "paths": {
-      "@/*": ["src/*"],
-      "@api/*": ["src/api/*"],
-      "@components/*": ["src/components/*"],
-      "@screens/*": ["src/screens/*"]
-    }
+    // "paths": {
+    //   "@/*": ["src/*"],
+    //   "@api/*": ["src/api/*"],
+    //   "@components/*": ["src/components/*"],
+    //   "@screens/*": ["src/screens/*"]
+    // }
   }
 }
