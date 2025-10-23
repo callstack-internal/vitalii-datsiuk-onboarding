@@ -1,0 +1,4 @@
+appId: com.weatherapp
+---
+- launchApp
+- assertVisible: "List page"

@@ -76,3 +76,6 @@ yarn-error.log
 
 # Rock
 .rock/
+
+# Env
+.env
