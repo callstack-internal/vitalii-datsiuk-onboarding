@@ -4,6 +4,11 @@
   "private": true,
   "scripts": {
     "android": "rock run:android",
+    "e2e:android:build": "cd android && ./gradlew assembleDebug",
+    "e2e:android:install": "adb install android/app/build/outputs/apk/debug/app-debug.apk",
+    "e2e:android:run": "maestro test ./tests/e2e/android/sample.yaml",
+    "e2e:android": "npm run e2e:android:build && npm run e2e:android:install && npm run e2e:android:run",
+    "e2e:ios:run": "maestro test ./tests/e2e/ios/sample.yaml",
     "format": "prettier --write .",
     "ios": "rock run:ios",
     "lint": "eslint .",
