@@ -1,0 +1,17 @@
+default_platform(:android)
+
+platform :android do
+  lane :debug_build do
+    puts "Starting Android debug build"
+
+    gradle(task: "assembleDebug")
+
+     # Standard debug APK path relative to the 'android' directory
+     apk_path = "../app/build/outputs/apk/debug/app-debug.apk"
+     if File.exist?(apk_path)
+      UI.success("Android debug bundle was built successfully at: #{apk_path}")
+     else
+      UI.user_error!("No Android debug bundle found at the expected output path: #{apk_path}")
+     end
+  end
+end
