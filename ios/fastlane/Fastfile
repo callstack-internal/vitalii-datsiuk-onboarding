@@ -5,22 +5,31 @@ platform :ios do
   lane :debug_build do
     puts "Starting IOS debug build"
     puts "Installing cocoapods"
-    cocoapods(
-      clean: true,
-      install: true
-    )
+    cocoapods()
+
+
+    derived_data_path = File.expand_path("./derivedData")
+    output_directory = File.join(derived_data_path, "Build", "Products")
+    puts "Derived data path: #{derived_data_path}"
+    puts "Output directory: #{output_directory}"
 
     puts "Creating a debug build"
     gym(
       scheme: "weatherApp",
       configuration: "Debug",
-      # sdk: "iphonesimulator",
-      destination: "platform=iOS Simulator,name=iPhone 17 Pro",
-      build_for_testing: true,
-      output_directory: "./build/e2e"
-    )
+      workspace: "weatherApp.xcworkspace",
+      clean: true,
+      verbose: true,
+      skip_archive: true,
+      skip_package_ipa: true,
+      sdk: "iphonesimulator",
+      destination: "generic/platform=iOS Simulator",
+      derived_data_path: derived_data_path,
+      output_directory: output_directory,
+      output_name: "weatherApp",
+      )
 
-    app_path = Actions.lane_context[SharedValues::GYM_APP_PATH]
+    app_path = Dir.glob("#{output_directory}/Debug-iphonesimulator/*.app").first
     if app_path && File.exist?(app_path)
       UI.success("IOS debug bundle was built successfully at: #{app_path}")
     else
