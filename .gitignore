@@ -79,3 +79,9 @@ yarn-error.log
 
 # Env
 .env
+
+# Fastlane
+**/fastlane/report.xml
+**/fastlane/Preview.html
+**/fastlane/screenshots
+**/fastlane/test_output

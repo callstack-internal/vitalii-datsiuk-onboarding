@@ -1,0 +1,30 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Create debug build"
+  lane :debug_build do
+    puts "Starting IOS debug build"
+    puts "Installing cocoapods"
+    cocoapods(
+      clean: true,
+      install: true
+    )
+
+    puts "Creating a debug build"
+    gym(
+      scheme: "weatherApp",
+      configuration: "Debug",
+      # sdk: "iphonesimulator",
+      destination: "platform=iOS Simulator,name=iPhone 17 Pro",
+      build_for_testing: true,
+      output_directory: "./build/e2e"
+    )
+
+    app_path = Actions.lane_context[SharedValues::GYM_APP_PATH]
+    if app_path && File.exist?(app_path)
+      UI.success("IOS debug bundle was built successfully at: #{app_path}")
+    else
+      UI.user_error!("No IOS debug bundle found at the gym output path: #{app_path}")
+    end
+  end
+end
